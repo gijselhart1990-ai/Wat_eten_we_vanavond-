@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#173a35" />
+    <meta
+      name="description"
+      content="Focusboard is een rustige, toegankelijke dagplanner waarmee je taken ordent en gefocust werkt."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Focusboard — ruimte voor wat belangrijk is" />
+    <meta
+      property="og:description"
+      content="Plan bewust, werk met aandacht en sluit je dag met rust af."
+    />
+    <meta property="og:locale" content="nl_NL" />
+    <link rel="canonical" href="https://focusboard.netlify.app/" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" href="/assets/icon.svg" type="image/svg+xml" />
+    <title>Focusboard — ruimte voor wat belangrijk is</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Focusboard",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Web",
+        "inLanguage": "nl",
+        "description": "Een rustige, toegankelijke dagplanner met focustimer."
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#planner">Direct naar je planner</a>
+
+    <header class="site-header" data-header>
+      <div class="shell header-inner">
+        <a class="brand" href="#top" aria-label="Focusboard, naar boven">
+          <svg aria-hidden="true" viewBox="0 0 32 32" class="brand-mark">
+            <path d="M16 2.5c7.46 0 13.5 6.04 13.5 13.5S23.46 29.5 16 29.5 2.5 23.46 2.5 16 8.54 2.5 16 2.5Z" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M9.4 18.4c2.1-6.45 5.62-9.67 10.56-9.67 0 4.94-3.22 8.46-9.66 10.57l-.9-.9Z" fill="currentColor"/>
+          </svg>
+          <span>focusboard</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+          <span class="sr-only">Menu openen</span>
+          <span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
+        <nav id="primary-navigation" class="site-nav" aria-label="Hoofdnavigatie">
+          <a href="#planner">Planner</a>
+          <a href="#focus">Focus</a>
+          <a href="#werkwijze">Werkwijze</a>
+          <a class="nav-cta" href="#nieuwe-taak">Plan je dag <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> je persoonlijke focusruimte</p>
+          <h1>Maak ruimte voor<br /><em>wat ertoe doet.</em></h1>
+          <p class="hero-intro">Een heldere planner voor dagen die niet voller hoeven, maar beter mogen voelen.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#nieuwe-taak">Begin met plannen <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="#werkwijze">Zo werkt het <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="trust-line"><span aria-hidden="true">✦</span> Alles blijft veilig op jouw apparaat</div>
+        </div>
+
+        <div class="hero-visual" aria-label="Voorbeeld van een overzichtelijke dagplanning">
+          <div class="sun-orb" aria-hidden="true"></div>
+          <div class="visual-card visual-top">
+            <span class="tiny-label">VANDAAG</span>
+            <strong id="hero-date">Maandag 27 juli</strong>
+            <div class="visual-progress"><span></span></div>
+            <small><b>3</b> van 5 aandachtspunten</small>
+          </div>
+          <div class="visual-card visual-task">
+            <span class="task-check" aria-hidden="true">✓</span>
+            <div><strong>Voorbereiding afronden</strong><small>Belangrijk · 10:00</small></div>
+            <span class="visual-arrow" aria-hidden="true">↗</span>
+          </div>
+          <div class="visual-card visual-note">
+            <span class="note-icon" aria-hidden="true">✦</span>
+            <p>“Kies één ding dat vandaag echt verschil maakt.”</p>
+          </div>
+          <div class="visual-line" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section class="planner-section" id="planner" aria-labelledby="planner-title">
+        <div class="shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">JOUW OVERZICHT</p>
+              <h2 id="planner-title">De dag, met aandacht.</h2>
+            </div>
+            <p id="today-label" class="today-label"></p>
+          </div>
+
+          <div class="dashboard-grid">
+            <aside class="summary-panel" aria-label="Dagoverzicht">
+              <div class="summary-topline"><span>VANDAAG IN BEELD</span><span class="leaf-icon" aria-hidden="true">⌁</span></div>
+              <div class="progress-ring" data-progress-ring aria-label="0 procent afgerond"><span data-progress-number>0%</span></div>
+              <p class="summary-title">Rustig aan.<br />Je bent onderweg.</p>
+              <p class="summary-copy" data-summary-copy>Voeg je eerste aandachtspunt toe om je dag vorm te geven.</p>
+              <dl class="stats-list">
+                <div><dt>Open</dt><dd data-open-count>0</dd></div>
+                <div><dt>Afgerond</dt><dd data-done-count>0</dd></div>
+                <div><dt>Focusmin.</dt><dd data-focus-minutes>0</dd></div>
+              </dl>
+            </aside>
+
+            <div class="task-panel">
+              <div class="task-panel-heading">
+                <div>
+                  <p class="tiny-label">AANDACHTSPUNTEN</p>
+                  <h3>Wat vraagt jouw tijd?</h3>
+                </div>
+                <button class="icon-button" type="button" data-reset-tasks title="Verwijder alle taken" aria-label="Verwijder alle taken">⌫</button>
+              </div>
+
+              <div id="nieuwe-taak" class="task-form-anchor" tabindex="-1"></div>
+              <form class="task-form" id="new-task-form" novalidate>
+                <fieldset>
+                  <legend class="sr-only">Nieuw aandachtspunt</legend>
+                  <div class="form-field form-field-title">
+                    <label for="task-title">Wat wil je doen?</label>
+                    <input id="task-title" name="title" type="text" maxlength="120" placeholder="Bijvoorbeeld: voorstel nalopen" required />
+                    <p class="field-error" id="title-error" aria-live="polite"></p>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label for="task-category">Soort</label>
+                      <select id="task-category" name="category">
+                        <option value="Werk">Werk</option>
+                        <option value="Privé">Privé</option>
+                        <option value="Gezondheid">Gezondheid</option>
+                        <option value="Leren">Leren</option>
+                      </select>
+                    </div>
+                    <div class="form-field">
+                      <label for="task-priority">Aandacht</label>
+                      <select id="task-priority" name="priority">
+                        <option value="normaal">Normaal</option>
+                        <option value="belangrijk">Belangrijk</option>
+                        <option value="klein">Klein</option>
+                      </select>
+                    </div>
+                    <button class="button button-dark" type="submit"><span aria-hidden="true">+</span> Toevoegen</button>
+                  </div>
+                </fieldset>
+              </form>
+
+              <div class="task-controls" aria-label="Taken filteren en sorteren">
+                <div class="filter-group" role="group" aria-label="Statusfilter">
+                  <button class="filter-button is-active" type="button" data-filter="all">Alles <span data-total-count>0</span></button>
+                  <button class="filter-button" type="button" data-filter="open">Open <span data-open-count>0</span></button>
+                  <button class="filter-button" type="button" data-filter="done">Afgerond <span data-done-count>0</span></button>
+                </div>
+                <label class="sort-label" for="sort-tasks">Sorteer <select id="sort-tasks"><option value="newest">Nieuwste</option><option value="priority">Aandacht eerst</option><option value="alpha">A–Z</option></select></label>
+              </div>
+
+              <ul id="task-list" class="task-list" aria-live="polite"></ul>
+              <div id="task-empty" class="empty-state" hidden>
+                <span aria-hidden="true">⌁</span>
+                <h4>Hier mag het even leeg zijn.</h4>
+                <p>Een kleine, heldere lijst geeft je brein ruimte. Voeg toe wat nu telt.</p>
+                <button class="text-button" type="button" data-focus-input>Voeg een aandachtspunt toe <span aria-hidden="true">↑</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="focus-section" id="focus" aria-labelledby="focus-title">
+        <div class="shell focus-layout">
+          <div class="focus-copy">
+            <p class="eyebrow">EEN MOMENT VOOR DIEP WERK</p>
+            <h2 id="focus-title">Zet de ruis<br />even <em>zachter.</em></h2>
+            <p>Niet harder werken, maar bewust kiezen waar je aandacht naartoe gaat. Eén blok. Eén taak. Daarna pauze.</p>
+            <ul class="benefit-list">
+              <li><span aria-hidden="true">✓</span> Een zachte herinnering, zonder druk</li>
+              <li><span aria-hidden="true">✓</span> Kies een ritme dat bij je past</li>
+              <li><span aria-hidden="true">✓</span> Bewaar je voortgang lokaal</li>
+            </ul>
+          </div>
+          <div class="timer-card" aria-labelledby="timer-heading">
+            <div class="timer-card-top"><span class="tiny-label">FOCUSSESSIE</span><span class="timer-status" data-timer-status>klaar wanneer jij dat bent</span></div>
+            <h3 id="timer-heading" class="sr-only">Focustimer</h3>
+            <div class="timer-dial" data-timer-dial><time data-timer-display datetime="PT25M">25:00</time><span>minuten voor jezelf</span></div>
+            <div class="timer-presets" role="group" aria-label="Kies focusduur">
+              <button type="button" data-duration="25" class="is-active">25 min</button>
+              <button type="button" data-duration="45">45 min</button>
+              <button type="button" data-duration="60">60 min</button>
+            </div>
+            <div class="timer-actions">
+              <button type="button" class="button button-primary" data-timer-toggle>Start focus <span aria-hidden="true">→</span></button>
+              <button type="button" class="button button-quiet" data-timer-reset>Opnieuw</button>
+            </div>
+            <p class="timer-help" aria-live="polite" data-timer-message>Kies een duur en start wanneer je er klaar voor bent.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="how-section shell" id="werkwijze" aria-labelledby="how-title">
+        <div class="how-header">
+          <div><p class="eyebrow">KLEIN BEGINNEN</p><h2 id="how-title">Een ritme dat blijft.</h2></div>
+          <p>Focusboard is geen systeem dat je moet bijhouden. Het is een plek waar je elke dag opnieuw kunt landen.</p>
+        </div>
+        <ol class="steps">
+          <li><span class="step-number">01</span><h3>Maak het zichtbaar</h3><p>Schrijf op wat aandacht vraagt. Uit je hoofd, op een heldere plek.</p></li>
+          <li><span class="step-number">02</span><h3>Kies bewust</h3><p>Geef één of twee taken extra gewicht. De rest mag wachten.</p></li>
+          <li><span class="step-number">03</span><h3>Werk met ruimte</h3><p>Zet een focusblok, doe wat nodig is en rond af zonder haast.</p></li>
+        </ol>
+      </section>
+
+      <section class="closing-section">
+        <div class="shell closing-inner">
+          <div><p class="eyebrow">JOUW DAG, JOUW TEMPO</p><h2>Vandaag is een goed<br />moment om te <em>beginnen.</em></h2></div>
+          <a class="button button-light" href="#nieuwe-taak">Plan mijn eerste taak <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer shell">
+      <a class="brand" href="#top" aria-label="Focusboard, naar boven"><svg aria-hidden="true" viewBox="0 0 32 32" class="brand-mark"><path d="M16 2.5c7.46 0 13.5 6.04 13.5 13.5S23.46 29.5 16 29.5 2.5 23.46 2.5 16 8.54 2.5 16 2.5Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M9.4 18.4c2.1-6.45 5.62-9.67 10.56-9.67 0 4.94-3.22 8.46-9.66 10.57l-.9-.9Z" fill="currentColor"/></svg><span>focusboard</span></a>
+      <p>Een rustigere manier om te plannen.</p>
+      <p>© <span id="year"></span> Focusboard</p>
+    </footer>
+
+    <div class="toast-region" aria-live="polite" aria-atomic="true"></div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

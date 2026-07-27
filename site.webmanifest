@@ -1,0 +1,11 @@
+{
+  "name": "Focusboard",
+  "short_name": "Focusboard",
+  "description": "Een rustige, toegankelijke dagplanner met focustimer.",
+  "lang": "nl-NL",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f6f0",
+  "theme_color": "#173a35",
+  "icons": [{ "src": "/assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
