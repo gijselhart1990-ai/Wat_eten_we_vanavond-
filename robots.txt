@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://focusboard.netlify.app/sitemap.xml
+Sitemap: https://wat-eten-we-vanavond.netlify.app/sitemap.xml

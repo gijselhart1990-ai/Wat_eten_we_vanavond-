@@ -17,6 +17,6 @@ Open daarna `http://localhost:4173`.
 1. Push deze map naar een GitHub-repository.
 2. Importeer de repository in Netlify.
 3. Gebruik `.` als publish directory; er is geen build command nodig.
-4. Pas voor de eerste publicatie de drie voorkomens van `focusboard.netlify.app` aan in `index.html`, `robots.txt` en `sitemap.xml` naar de definitieve domeinnaam.
+4. De productie-URL is ingesteld op `wat-eten-we-vanavond.netlify.app` in `index.html`, `robots.txt` en `sitemap.xml`.
 
 `netlify.toml` stelt security headers en langdurige asset-cache in.
