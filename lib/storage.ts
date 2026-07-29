@@ -13,9 +13,23 @@ export const initialPlannerState: PlannerState = {
 };
 
 function client() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  return url && key ? createClient(url, key) : null;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
+
+  if (!url || !key) return null;
+
+  try {
+    const parsedUrl = new URL(url);
+    if (parsedUrl.protocol !== "https:" && parsedUrl.protocol !== "http:") {
+      return null;
+    }
+  } catch {
+    // A bad deployment variable must never prevent the foodplanner from
+    // rendering. Storage simply remains unavailable until it is corrected.
+    return null;
+  }
+
+  return createClient(url, key);
 }
 
 export function usePlannerStorage() {
