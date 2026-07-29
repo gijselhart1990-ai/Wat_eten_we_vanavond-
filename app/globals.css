@@ -1,8 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@10..48,75..100,800&family=Inter:wght@400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --font-display: "Bricolage Grotesque";
+  --font-body: "Inter";
   --bg: #17130f;
   --bg-deep: #100d0a;
   --surface: #211b16;
