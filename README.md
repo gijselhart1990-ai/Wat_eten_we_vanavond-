@@ -1,22 +1,22 @@
-# Focusboard
+# Wat eten we vanavond?
 
-Een lichte, statische Nederlandse dagplanner met taken, filters en een focustimer. Taken en focusminuten worden alleen in de `localStorage` van de browser bewaard; er is geen account, tracker of externe afhankelijkheid.
+Een Nederlandstalige foodplanner met 17 opgeslagen recepten, weekplanning en een automatische, gegroepeerde boodschappenlijst.
 
 ## Lokaal starten
 
-Deze app heeft geen installatie- of buildstap nodig. Start bijvoorbeeld een eenvoudige webserver vanuit de projectmap:
-
 ```powershell
-python -m http.server 4173
+pnpm install
+pnpm dev
 ```
 
-Open daarna `http://localhost:4173`.
+Open daarna [http://localhost:3000](http://localhost:3000).
 
-## Publiceren op Netlify
+## Supabase-opslag
 
-1. Push deze map naar een GitHub-repository.
-2. Importeer de repository in Netlify.
-3. Gebruik `.` als publish directory; er is geen build command nodig.
-4. De productie-URL is ingesteld op `wat-eten-we-vanavond.netlify.app` in `index.html`, `robots.txt` en `sitemap.xml`.
+Maak een Supabase-project, schakel **Anonymous Sign-Ins** in, voer [supabase/schema.sql](supabase/schema.sql) uit en kopieer `.env.example` naar `.env.local`. Vul daarna de URL en anon key in. De app maakt per apparaat een anonieme Supabase-sessie aan en bewaart daar de weekplanning, porties, favorieten, eigen boodschappenitems en afvinkstatus met een korte debounce.
 
-`netlify.toml` stelt security headers en langdurige asset-cache in.
+Zonder omgevingsvariabelen werkt de volledige interface lokaal; alleen de permanente cloudopslag is dan niet actief.
+
+## Productie
+
+De app is een Next.js 14 App Router-project en kan direct worden geïmporteerd in Vercel of Netlify. Gebruik `pnpm build` als build-opdracht.
