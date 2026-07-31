@@ -9,7 +9,7 @@ export function getPicnicAuthKey(request: NextRequest) {
 
 export function safePicnicError(error: unknown) {
   const message = error instanceof Error ? error.message : "Onbekende fout";
-  if (/login|password|wachtwoord|unauthor|auth|forbidden|401|403/i.test(message)) {
+  if (/unauthor|forbidden|auth key|session|sessie|401|403/i.test(message)) {
     return "De Picnic-sessie is niet meer geldig. Verbind je account opnieuw.";
   }
   return `Picnic kon de aanvraag niet verwerken: ${message}`;
