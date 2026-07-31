@@ -29,6 +29,8 @@ type MergedShoppingItem = ShoppingItem & {
   unspecifiedAmount: boolean;
 };
 
+const COMBINED_UNIT_PREFIX = "__combined__:";
+
 const PRODUCT_ALIASES: Record<string, string> = {
   komkommers: "komkommer",
   kipfilets: "kipfilet",
@@ -108,19 +110,13 @@ function numberLabel(value: number) {
 }
 
 export function formatAmount(amount: number | null, unit: string) {
+  if (unit.startsWith(COMBINED_UNIT_PREFIX)) return unit.slice(COMBINED_UNIT_PREFIX.length);
   if (amount === null) return "naar smaak";
   const normalizedUnit = normalize(unit);
   if (["stuk", "stuks", "st", "x"].includes(normalizedUnit)) return `${numberLabel(amount)}x`;
   if (["g", "gram"].includes(normalizedUnit) && amount >= 1000) return `${numberLabel(amount / 1000)} kg`;
   if (normalizedUnit === "ml" && amount >= 1000) return `${numberLabel(amount / 1000)} l`;
   return [numberLabel(amount), unit].filter(Boolean).join(" ");
-}
-
-export function formatShoppingItemAmount(item: ShoppingItem) {
-  const labels = item.quantities?.map((quantity) => formatAmount(quantity.amount, quantity.unit)) || [];
-  if (!labels.length && item.amount !== null) labels.push(formatAmount(item.amount, item.unit));
-  if (item.unspecifiedAmount || !labels.length) labels.push("naar smaak");
-  return labels.join(" + ");
 }
 
 function addQuantity(item: MergedShoppingItem, amount: number | null, unit: string) {
@@ -149,12 +145,15 @@ function finalizeItem(item: MergedShoppingItem): ShoppingItem {
     .sort((left, right) => left.rank - right.rank || left.unit.localeCompare(right.unit, "nl"))
     .map(({ amount, unit }) => ({ amount, unit }));
   const primary = quantities[0];
+  const labels = quantities.map((quantity) => formatAmount(quantity.amount, quantity.unit));
+  if (item.unspecifiedAmount) labels.push("naar smaak");
+  const unit = labels.length > 1 ? `${COMBINED_UNIT_PREFIX}${labels.join(" + ")}` : primary?.unit ?? "";
 
   return {
     id: item.id,
     name: item.name,
     amount: primary?.amount ?? null,
-    unit: primary?.unit ?? "",
+    unit,
     category: item.category,
     quantities,
     unspecifiedAmount: item.unspecifiedAmount,
