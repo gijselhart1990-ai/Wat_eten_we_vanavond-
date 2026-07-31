@@ -34,16 +34,19 @@ async function request<T>(path: string, options: RequestInit & { authKey?: strin
   });
 
   if (!response.ok) throw new Error(await readError(response));
-  if (response.status === 204 || response.headers.get("content-length") === "0") return undefined as T;
-  return response.json() as Promise<T>;
+  if (response.status === 204) return undefined as T;
+
+  const body = await response.text();
+  if (!body) return undefined as T;
+  return JSON.parse(body) as T;
 }
 
-export async function loginToPicnic(email: string, password: string) {
+export async function loginToPicnic(username: string, password: string) {
   const secret = createHash("md5").update(password, "utf8").digest("hex");
   const response = await fetch(`${API_URL}/user/login`, {
     method: "POST",
     headers: headers(),
-    body: JSON.stringify({ key: email, secret, client_id: 30100 }),
+    body: JSON.stringify({ key: username, secret, client_id: 30100 }),
     cache: "no-store",
   });
 
@@ -182,7 +185,8 @@ export async function logoutFromPicnic(authKey: string) {
 export async function addProductsToPicnicCart(authKey: string, products: Array<{ productId: string; quantity: number }>) {
   const body: Record<string, number> = {};
   products.forEach(({ productId, quantity }) => {
-    body[productId] = Math.max(1, Math.min(99, Math.floor(quantity)));
+    const safeQuantity = Math.max(1, Math.min(99, Math.floor(quantity)));
+    body[productId] = Math.min(99, (body[productId] || 0) + safeQuantity);
   });
 
   return request<unknown>("/cart/products/add", {
