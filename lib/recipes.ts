@@ -141,6 +141,22 @@ const sourceRecipes: Omit<Recipe, "photo">[] = [
       "Serveer de nachoschotel warm met guacamole en de mangosalsa."],
   },
   {
+    id: "pizza-quesadillas", name: "Pizza-quesadilla's", source: "Picnic",
+    type: "Wrap", time: 25, serv: 4, kcal: 615, p: 26, c: 58, f: 26, est: true,
+    base: "#E9D6A9", pal: ["#F2C94C", "#C0433A", "#7A4A33", "#4E9A4A", "#D68A3A"], drizzle: false,
+    ing: [
+      { n: "Volkorenwraps", a: 8, u: "stuk", c: "br" }, { n: "Italiaanse roerbakgroenten", a: 400, u: "g", c: "gf" },
+      { n: "Witte champignons (gesneden)", a: 250, u: "g", c: "gf" }, { n: "Geraspte kaas", a: 250, u: "g", c: "zk" },
+      { n: "Pizzasaus", a: 1, u: "blik", c: "sk" }, { n: "Pizzakruiden", a: 1, u: "el", c: "sk" },
+    ],
+    steps: ["Bak de champignons en Italiaanse roerbakgroenten in een pan gaar tot het vocht is verdampt. Breng op smaak met de pizzakruiden.",
+      "Besmeer 4 wraps met pizzasaus.",
+      "Verdeel de helft van de geraspte kaas over deze wraps, gevolgd door de groente-champignonmix en daarna de rest van de kaas.",
+      "Leg er telkens een tweede wrap bovenop en druk licht aan.",
+      "Bak de quesadilla's om en om in een droge koekenpan (ca. 2-3 min per kant) tot ze goudbruin zijn en de kaas gesmolten is.",
+      "Snijd elke quesadilla in punten en serveer direct."],
+  },
+  {
     id: "sweet-chilli-slaw", name: "Sweet Chilli Chicken Slaw Bowls", source: "MacroFit",
     type: "Bowl", time: 25, serv: 4, kcal: 410, p: 36, c: 42, f: 10,
     base: "#EFE6CF", pal: ["#C85B2E", "#8E5AA0", "#F2C94C", "#7FB77E", "#E08A3C"], drizzle: true,
