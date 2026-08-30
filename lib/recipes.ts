@@ -21,6 +21,23 @@ const sourceRecipes: Omit<Recipe, "photo">[] = [
       "Bak de ovenschotel ca. 20 min in het midden van de oven tot de kaas gesmolten en goudbruin is."],
   },
   {
+    id: "snelle-spaghetti-gehaktballetjes", name: "Snelle spaghetti met gehaktballetjes", source: "Picnic",
+    type: "Pasta", time: 15, serv: 4, kcal: 525, p: 28, c: 48, f: 22, est: true,
+    base: "#E4CE8E", pal: ["#C0433A", "#7A4A33", "#3F7D3A", "#E7B84E", "#D14A3A"], drizzle: false,
+    ing: [
+      { n: "Verse spaghetti", a: 250, u: "g", c: "pg" }, { n: "Pastasaus bolognese", a: 600, u: "g", c: "sk" },
+      { n: "Gehaktballetjes (soepballetjes)", a: 250, u: "g", c: "vv" }, { n: "Cherrytomaatjes", a: 400, u: "g", c: "gf" },
+      { n: "Parmezaanflakes", a: 80, u: "g", c: "zk" }, { n: "Verse basilicum", a: 1, u: "handje", c: "gf" },
+    ],
+    steps: ["Kook de verse spaghetti volgens de verpakking (ca. 3-4 min) en giet af.",
+      "Halveer de cherrytomaatjes.",
+      "Bak de gehaktballetjes in een licht ingevette pan rondom bruin en gaar (ca. 5 min).",
+      "Voeg de cherrytomaatjes toe en bak 2-3 min mee tot ze zacht worden.",
+      "Schenk de bolognesesaus erbij en laat op laag vuur ca. 5 min zachtjes doorwarmen.",
+      "Meng de spaghetti door de saus of verdeel de saus over de spaghetti.",
+      "Bestrooi met Parmezaanflakes en verse basilicum en serveer direct."],
+  },
+  {
     id: "sweet-chilli-slaw", name: "Sweet Chilli Chicken Slaw Bowls", source: "MacroFit",
     type: "Bowl", time: 25, serv: 4, kcal: 410, p: 36, c: 42, f: 10,
     base: "#EFE6CF", pal: ["#C85B2E", "#8E5AA0", "#F2C94C", "#7FB77E", "#E08A3C"], drizzle: true,
