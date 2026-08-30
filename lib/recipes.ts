@@ -484,6 +484,22 @@ const sourceRecipes: Omit<Recipe, "photo">[] = [
       "Serveer met een lepel zure room erover."],
   },
   {
+    id: "vissticks-spinazie-creme-krieltjes", name: "Vissticks met spinazie à la crème en krieltjes", source: "Picnic",
+    type: "Plate", time: 25, serv: 4, kcal: 770, p: 17, c: 72, f: 38, est: true,
+    base: "#EFEBE2", pal: ["#D68A3A", "#3F7D3A", "#E7B84E", "#F4EFE6", "#E3B24E"], drizzle: false,
+    ing: [
+      { n: "Vissticks", a: 20, u: "stuk", c: "vv" }, { n: "Mini krieltjes", a: 900, u: "g", c: "gf" },
+      { n: "Spinazie à la crème", a: 750, u: "g", c: "gf" }, { n: "Appelmoes", a: null, u: "", c: "gf" },
+      { n: "Olijfolie", a: 4, u: "el", c: "sk" }, { n: "Peper & zout", a: null, u: "", c: "sk" },
+    ],
+    steps: ["Kook de mini krieltjes in ca. 10 min bijna gaar en giet af.",
+      "Verhit de olijfolie in een pan en bak de krieltjes goudbruin en krokant. Breng op smaak met peper en zout.",
+      "Bak de vissticks krokant en goudbruin in een pan, oven of airfryer.",
+      "Verwarm de spinazie à la crème in een steelpan volgens de verpakking.",
+      "Verdeel de krieltjes, spinazie à la crème en vissticks over de borden.",
+      "Serveer met een schep appelmoes."],
+  },
+  {
     id: "sweet-chilli-slaw", name: "Sweet Chilli Chicken Slaw Bowls", source: "MacroFit",
     type: "Bowl", time: 25, serv: 4, kcal: 410, p: 36, c: 42, f: 10,
     base: "#EFE6CF", pal: ["#C85B2E", "#8E5AA0", "#F2C94C", "#7FB77E", "#E08A3C"], drizzle: true,
