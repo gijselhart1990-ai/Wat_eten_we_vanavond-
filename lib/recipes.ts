@@ -2,6 +2,25 @@ import type { Recipe } from "./types";
 
 const sourceRecipes: Omit<Recipe, "photo">[] = [
   {
+    id: "pasta-broccoli-zalm", name: "Pasta-ovenschotel met broccoli en zalm", source: "Picnic",
+    type: "Oven", time: 40, serv: 4, kcal: 705, p: 39, c: 58, f: 36, est: true,
+    base: "#E9D6A9", pal: ["#E8836B", "#4E9A4A", "#E7B84E", "#7FB77E", "#F4EFE6"], drizzle: false,
+    ing: [
+      { n: "Zalmfilet zonder huid", a: 300, u: "g", c: "vv" }, { n: "Broccoli", a: 1, u: "stuk", c: "gf" },
+      { n: "Prei (gesneden)", a: 200, u: "g", c: "gf" }, { n: "Fusilli", a: 300, u: "g", c: "pg" },
+      { n: "Bechamelsaus", a: 200, u: "ml", c: "sk" }, { n: "Geraspte kaas", a: 175, u: "g", c: "zk" },
+      { n: "Knoflook", a: 2, u: "teen", c: "gf" }, { n: "Olijfolie", a: 2, u: "el", c: "sk" },
+      { n: "Peper & zout", a: null, u: "", c: "sk" },
+    ],
+    steps: ["Verwarm de oven voor op 200°C.",
+      "Kook de fusilli in ruim water beetgaar (ca. 6 min). Voeg de laatste 3 minuten de broccoliroosjes toe en giet daarna alles af.",
+      "Snijd de prei in ringen en snipper de knoflook. Fruit ze kort glazig in de olijfolie.",
+      "Meng de afgegoten pasta en broccoli met de prei, knoflook en bechamelsaus. Breng op smaak met peper en zout.",
+      "Schep het mengsel in een ovenschaal en bestrooi met de geraspte kaas.",
+      "Snijd de zalm in blokjes en verdeel over de schotel; druk licht aan.",
+      "Bak de ovenschotel ca. 20 min in het midden van de oven tot de kaas gesmolten en goudbruin is."],
+  },
+  {
     id: "sweet-chilli-slaw", name: "Sweet Chilli Chicken Slaw Bowls", source: "MacroFit",
     type: "Bowl", time: 25, serv: 4, kcal: 410, p: 36, c: 42, f: 10,
     base: "#EFE6CF", pal: ["#C85B2E", "#8E5AA0", "#F2C94C", "#7FB77E", "#E08A3C"], drizzle: true,
