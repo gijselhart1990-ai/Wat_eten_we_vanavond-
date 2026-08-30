@@ -157,6 +157,23 @@ const sourceRecipes: Omit<Recipe, "photo">[] = [
       "Snijd elke quesadilla in punten en serveer direct."],
   },
   {
+    id: "sticky-vissticks-broccoli-rijst", name: "Sticky vissticks met broccoli en rijst", source: "Picnic",
+    type: "Bowl", time: 20, serv: 4, kcal: 650, p: 20, c: 100, f: 15, est: true,
+    base: "#EFE6CF", pal: ["#D68A3A", "#3F7D3A", "#7A4A33", "#7FB77E", "#F2C94C"], drizzle: true,
+    ing: [
+      { n: "Basmatirijst", a: 400, u: "g", c: "pg" }, { n: "Vissticks", a: 15, u: "stuk", c: "vv" },
+      { n: "Broccoli", a: 1, u: "stuk", c: "gf" }, { n: "Bosui", a: 1, u: "stuk", c: "gf" },
+      { n: "Citroen", a: 1, u: "stuk", c: "gf" }, { n: "Oester-knoflook woksaus", a: 6, u: "el", c: "sk" },
+    ],
+    steps: ["Kook de basmatirijst volgens de verpakking.",
+      "Verwarm de oven of airfryer voor en bak de vissticks krokant volgens de verpakking.",
+      "Snijd de broccoli in roosjes en kook of stoom ze in 4-5 min beetgaar.",
+      "Snijd de bosui in ringetjes en de citroen in partjes.",
+      "Verwarm de oester-knoflook woksaus kort in een pan en wentel de gebakken vissticks er voorzichtig door tot ze plakkerig glanzen.",
+      "Verdeel de rijst en broccoli over de borden of kommen en leg de sticky vissticks erop.",
+      "Garneer met bosui en een partje citroen en serveer direct."],
+  },
+  {
     id: "sweet-chilli-slaw", name: "Sweet Chilli Chicken Slaw Bowls", source: "MacroFit",
     type: "Bowl", time: 25, serv: 4, kcal: 410, p: 36, c: 42, f: 10,
     base: "#EFE6CF", pal: ["#C85B2E", "#8E5AA0", "#F2C94C", "#7FB77E", "#E08A3C"], drizzle: true,
