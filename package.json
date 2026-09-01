@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "extract:prototype": "node scripts/extract-prototype-assets.mjs"
+    "extract:prototype": "node scripts/extract-prototype-assets.mjs",
+    "screenshot": "node scripts/screenshot.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
@@ -20,6 +21,7 @@
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.5",
     "autoprefixer": "^10.4.21",
+    "playwright-core": "^1.62.1",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3"
