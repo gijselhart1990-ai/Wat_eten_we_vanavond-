@@ -116,7 +116,11 @@ select, .chip { appearance: none; height: 34px; border: 1px solid var(--line); b
 .primary-button, .secondary-button { min-height: 40px; border-radius: 10px; padding: 0 14px; font-size: 12px; font-weight: 800; }
 .primary-button { border: 0; background: linear-gradient(135deg, var(--amber), var(--tomato)); color: #2a1505; box-shadow: 0 8px 18px rgba(225, 91, 39, .18); }
 .secondary-button { border: 1px solid rgba(255, 184, 70, .35); background: rgba(255, 180, 40, .08); color: #ffca68; }
-.modal-add { width: 100%; margin-top: 28px; }
+.modal-share { position: absolute; z-index: 2; right: 56px; top: 14px; height: 35px; padding: 0 13px; display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 18px; background: rgba(20,15,11,.7); color: var(--txt); font-size: 12px; font-weight: 700; }
+.modal-actions { margin-top: 28px; display: grid; gap: 10px; }
+.modal-add, .modal-share-full { width: 100%; }
+.ghost-button { min-height: 40px; border-radius: 10px; padding: 0 14px; font-size: 12px; font-weight: 800; border: 1px solid var(--line-2); background: #241c16; color: var(--txt); }
+.modal-share:disabled, .ghost-button:disabled { opacity: .6; }
 
 .planner-intro { margin-bottom: 15px; }
 .planner-summary { display: flex; gap: 8px; color: var(--txt-3); font-size: 12px; margin-bottom: 21px; }
