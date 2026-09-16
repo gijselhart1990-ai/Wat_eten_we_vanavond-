@@ -39,7 +39,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .brand-copy strong { font-size: 19px; line-height: 1; font-weight: 800; }
 .brand-copy small { color: var(--txt-3); font-size: 11px; }
 .tabs { display: flex; padding: 4px; gap: 2px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.025); }
-.tab { border: 0; border-radius: 9px; padding: 8px 12px; background: transparent; color: var(--txt-2); font-weight: 650; font-size: 13px; transition: .18s ease; }
+.tab { border: 0; border-radius: 9px; padding: 8px 12px; background: transparent; color: var(--txt-2); font-weight: 650; font-size: 13px; transition: .18s ease; text-decoration: none; display: inline-flex; align-items: center; white-space: nowrap; }
 .tab span { margin-right: 6px; color: var(--txt-3); }
 .tab:hover { background: rgba(255,255,255,.06); color: var(--txt); }
 .tab.is-active { color: #251305; background: linear-gradient(135deg, var(--amber), var(--tomato)); box-shadow: 0 4px 14px rgba(214, 81, 38, .23); }
