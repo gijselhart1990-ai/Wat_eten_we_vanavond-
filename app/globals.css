@@ -123,6 +123,7 @@ select, .chip { appearance: none; height: 34px; border: 1px solid var(--line); b
 .modal-share:disabled, .ghost-button:disabled { opacity: .6; }
 
 .planner-intro { margin-bottom: 15px; }
+.planner-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .planner-summary { display: flex; gap: 8px; color: var(--txt-3); font-size: 12px; margin-bottom: 21px; }
 .planner-summary b { color: var(--amber); }
 .week-grid { display: grid; grid-template-columns: repeat(7, minmax(192px, 1fr)); gap: 11px; overflow-x: auto; padding-bottom: 8px; }

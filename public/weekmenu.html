@@ -370,6 +370,21 @@
 
   footer strong { color: var(--ink); font-weight: 700; }
 
+  .cta {
+    display: inline-block;
+    margin-top: 4px;
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 15px;
+    background: var(--accent);
+    color: #fff;
+    padding: 11px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .cta:hover { filter: brightness(1.05); }
+
   @media (max-width: 560px) {
     .recipe { grid-template-columns: 1fr; gap: 18px; }
     .day > summary { grid-template-columns: 54px 1fr 18px; gap: 11px; padding: 14px; }
@@ -393,6 +408,7 @@
       <span class="fact">2&times; kip &middot; 2&times; rund &middot; 1&times; vis &middot; 2&times; vega</span>
       <span class="fact">55 producten</span>
     </div>
+    <a class="cta" href="/?weekmenu=w38">Zet dit weekmenu in mijn planner &rarr;</a>
   </header>
 
   <section>
@@ -778,7 +794,7 @@
   </section>
 
   <footer>
-    <p><strong>Zo gebruik je dit:</strong> zet de zeven gerechten in je planner&#8209;app <em>Wat eten we vanavond?</em> en gebruik daar de Picnic&#8209;knop op het boodschappenscherm om het mandje te vullen. De categorieën hierboven (gf / vv / zk / pg / br / sk / ov) zijn dezelfde als in de app, dus de lijst valt één op één te kopiëren.</p>
+    <p><strong>Zo gebruik je dit:</strong> klik op <em>Zet dit weekmenu in mijn planner</em> hierboven &ndash; dan staan de zeven gerechten meteen in je weekplanner en vult de boodschappenlijst in de app zich vanzelf. Gebruik daar de Picnic&#8209;knop op het boodschappenscherm om het mandje te vullen.</p>
     <p>De kruiden, oliën en sauzen staan volledig op de lijst &ndash; schrap wat je al in huis hebt voordat je bestelt. Vinkjes blijven in deze browser bewaard.</p>
   </footer>
 

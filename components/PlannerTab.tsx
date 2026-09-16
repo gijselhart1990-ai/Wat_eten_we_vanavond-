@@ -15,6 +15,7 @@ export function PlannerTab({
   onRemove,
   onPortions,
   onFillSuggestions,
+  onLoadWeekmenu,
 }: {
   week: WeekPlan;
   portions: PortionOverrides;
@@ -23,6 +24,7 @@ export function PlannerTab({
   onRemove: (day: WeekDay, index: number) => void;
   onPortions: (day: WeekDay, index: number, portions: number) => void;
   onFillSuggestions: () => void;
+  onLoadWeekmenu: () => void;
 }) {
   const [pickerDay, setPickerDay] = useState<WeekDay | null>(null);
   const byId = useMemo(() => new Map(recipes.map((recipe) => [recipe.id, recipe])), [recipes]);
@@ -32,7 +34,10 @@ export function PlannerTab({
     <section className="view">
       <div className="page-intro planner-intro">
         <div><span className="eyebrow">Jouw week op een bord</span><h1>Weekplanner</h1><p>Plan maaltijden, pas porties aan en zie direct je dagelijkse macro&apos;s.</p></div>
-        <button className="secondary-button" onClick={onFillSuggestions}>✦ Vul met suggesties</button>
+        <div className="planner-actions">
+          <button className="secondary-button" onClick={onLoadWeekmenu}>🗓 Laad weekmenu</button>
+          <button className="secondary-button" onClick={onFillSuggestions}>✦ Vul met suggesties</button>
+        </div>
       </div>
       <div className="planner-summary"><span><b>{plannedMeals}</b> geplande maaltijd{plannedMeals === 1 ? "" : "en"}</span><span>•</span><span>Alles komt automatisch op je boodschappenlijst</span></div>
       <div className="week-grid">
