@@ -911,20 +911,11 @@ const sourceRecipes: Omit<Recipe, "photo">[] = [
   },
 ];
 
-// Gehotlinkte stockfoto's (keyword-based, CC-foto's via LoremFlickr) voor
-// gerechten die nog geen eigen afbeelding in /public/dishes hebben. De vaste
-// `lock` houdt de foto per gerecht stabiel. Zodra er een eigen foto is
-// (public/dishes/<id>.jpg) kan de regel hier weg.
-const PHOTO_OVERRIDES: Record<string, string> = {
-  "gekaramelliseerde-uienpasta": "https://loremflickr.com/800/600/pasta,caramelized,onion?lock=41",
-  "wm-teriyaki-kipnoedels": "https://loremflickr.com/800/600/teriyaki,chicken,noodles?lock=42",
-  "wm-pasta-tomaat-champignon-mozzarella": "https://loremflickr.com/800/600/pasta,tomato,mozzarella?lock=43",
-  "wm-wraps-rundergehakt": "https://loremflickr.com/800/600/beef,wrap,tortilla?lock=44",
-  "wm-zalm-couscous": "https://loremflickr.com/800/600/salmon,couscous?lock=45",
-  "wm-kipshoarma-turks-brood": "https://loremflickr.com/800/600/shawarma,chicken,pita?lock=46",
-  "wm-gehaktballetjes-puree-broccoli": "https://loremflickr.com/800/600/meatballs,mashed,potato?lock=47",
-  "wm-groentecurry-kikkererwten": "https://loremflickr.com/800/600/curry,chickpea,rice?lock=48",
-};
+// Optionele foto-overrides per recept. Standaard komt de foto uit
+// /public/dishes/<id>.jpg; een externe URL hier (bijv. een gehoste stockfoto)
+// wordt door DishPhoto rechtstreeks in de browser geladen. Leeg = alle
+// recepten gebruiken hun lokale foto (of de placeholder als die er nog niet is).
+const PHOTO_OVERRIDES: Record<string, string> = {};
 
 export const RECIPES: Recipe[] = sourceRecipes.map((recipe) => ({
   ...recipe,
