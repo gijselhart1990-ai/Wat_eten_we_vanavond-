@@ -10,6 +10,22 @@ export function DishPhoto({ recipe, priority = false, className = "" }: { recipe
   if (failed) {
     return <span className={`dish-art-wrap ${className}`}><DishArt r={recipe} fill /></span>;
   }
+  // Externe (gehotlinkte) foto's laden rechtstreeks in de browser van de
+  // bezoeker; die omzeilen next/image zodat er geen server-side ophaal- of
+  // domeinconfiguratie nodig is.
+  if (/^https?:\/\//.test(recipe.photo)) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        className={className}
+        src={recipe.photo}
+        alt={recipe.name}
+        loading={priority ? "eager" : "lazy"}
+        onError={() => setFailed(true)}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+      />
+    );
+  }
   return (
     <Image
       className={className}
