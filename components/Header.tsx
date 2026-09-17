@@ -30,6 +30,7 @@ export function Header({ tab, onTabChange }: { tab: Tab; onTabChange: (tab: Tab)
               <span aria-hidden="true">{item.icon}</span>{item.label}
             </button>
           ))}
+          <a className="tab" href="/weekmenu.html"><span aria-hidden="true">🗓</span>Weekmenu</a>
         </nav>
       </div>
     </header>

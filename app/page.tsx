@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Header, type Tab } from "../components/Header";
 import { PlannerTab } from "../components/PlannerTab";
 import { RecipeDetailModal } from "../components/RecipeDetailModal";
@@ -9,6 +9,7 @@ import { ShoppingTab } from "../components/ShoppingTab";
 import { DAYS } from "../lib/constants";
 import { RECIPES } from "../lib/recipes";
 import { usePlannerStorage } from "../lib/storage";
+import { WEEKMENU, buildWeekmenuPlan } from "../lib/weekmenu";
 import type { CategoryCode, Recipe, WeekDay } from "../lib/types";
 
 export default function Home() {
@@ -67,12 +68,26 @@ export default function Home() {
     shoppingList: [...current.shoppingList, { id: crypto.randomUUID(), name, category }],
   })), [setState]);
 
+  const loadWeekmenu = useCallback(() => setState((current) => ({ ...current, ...buildWeekmenuPlan() })), [setState]);
+
+  // Opent de app via de knop op /weekmenu.html (?weekmenu=w38): laad het
+  // weekmenu in de planner en spring naar het plannertabblad.
+  useEffect(() => {
+    if (!ready || typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("weekmenu") === WEEKMENU.id) {
+      loadWeekmenu();
+      setTab("planner");
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, [ready, loadWeekmenu]);
+
   return (
     <main>
       <Header tab={tab} onTabChange={setTab} />
       {!ready ? <div className="loading">Je planner wordt geladen…</div> : <>
         {tab === "recepten" && <RecipeGrid recipes={RECIPES} favorites={state.favorites} onToggleFavorite={toggleFavorite} onOpen={setOpenRecipe} />}
-        {tab === "planner" && <PlannerTab week={state.week} portions={state.weekPortions} recipes={RECIPES} onAdd={addToDay} onRemove={removeFromDay} onPortions={changePortions} onFillSuggestions={fillSuggestions} />}
+        {tab === "planner" && <PlannerTab week={state.week} portions={state.weekPortions} recipes={RECIPES} onAdd={addToDay} onRemove={removeFromDay} onPortions={changePortions} onFillSuggestions={fillSuggestions} onLoadWeekmenu={loadWeekmenu} />}
         {tab === "boodschappen" && <ShoppingTab week={state.week} portions={state.weekPortions} recipes={RECIPES} customItems={state.shoppingList} checked={state.checked} onToggle={(id) => setState((current) => ({ ...current, checked: { ...current.checked, [id]: !current.checked[id] } }))} onAddCustom={addCustomItem} onRemoveCustom={(id) => setState((current) => ({ ...current, shoppingList: current.shoppingList.filter((item) => item.id !== id) }))} />}
       </>}
       {openRecipe && <RecipeDetailModal recipe={openRecipe} onClose={() => setOpenRecipe(null)} onAdd={(recipe, portions) => { addToDay("Ma", recipe, portions); setOpenRecipe(null); setTab("planner"); }} />}

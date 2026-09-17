@@ -1,0 +1,844 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Wat eten we vanavond</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground: #F7F9F4;
+    --surface: #FFFFFF;
+    --surface-2: #EDF2E9;
+    --ink: #16241C;
+    --muted: #5E6F64;
+    --line: #DCE4D7;
+    --accent: #2F6B4F;
+    --accent-soft: #E3EFE6;
+    --signal: #C2472B;
+    --shadow: 0 1px 2px rgba(22, 36, 28, .05), 0 6px 18px -12px rgba(22, 36, 28, .18);
+
+    --display: "Fraunces", Georgia, "Times New Roman", serif;
+    --body: "Karla", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #111814;
+      --surface: #19221C;
+      --surface-2: #212C25;
+      --ink: #E7EEE7;
+      --muted: #9BAB9F;
+      --line: #2C3931;
+      --accent: #6FBF92;
+      --accent-soft: #1E3128;
+      --signal: #E8785A;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 18px -12px rgba(0, 0, 0, .6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #111814;
+    --surface: #19221C;
+    --surface-2: #212C25;
+    --ink: #E7EEE7;
+    --muted: #9BAB9F;
+    --line: #2C3931;
+    --accent: #6FBF92;
+    --accent-soft: #1E3128;
+    --signal: #E8785A;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 18px -12px rgba(0, 0, 0, .6);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 40px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+
+  a { color: var(--accent); }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ---------- header ---------- */
+  header { display: flex; flex-direction: column; gap: 10px; }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(32px, 7vw, 46px);
+    line-height: 1.05;
+    letter-spacing: -.015em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .daterange {
+    font-size: 17px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .fact {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 5px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    background: var(--surface);
+  }
+
+  /* ---------- section heads ---------- */
+  .sectionhead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+
+  .sectionhead h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+
+  /* ---------- days ---------- */
+  .days { display: flex; flex-direction: column; gap: 10px; }
+
+  .day {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .day > summary {
+    display: grid;
+    grid-template-columns: 62px 1fr 20px;
+    align-items: start;
+    gap: 14px;
+    padding: 16px 18px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .day > summary::-webkit-details-marker { display: none; }
+
+  .day > summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  .daychip {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.35;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 6px;
+    padding: 7px 6px;
+    text-align: center;
+  }
+
+  .daychip b { display: block; font-size: 16px; font-weight: 500; letter-spacing: 0; }
+
+  .dish {
+    font-family: var(--display);
+    font-size: 19px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 2px 0 6px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    letter-spacing: .03em;
+  }
+
+  .tags .time { color: var(--signal); }
+
+  .chev {
+    width: 20px; height: 20px;
+    margin-top: 8px;
+    color: var(--muted);
+    transition: transform .18s ease;
+  }
+
+  .day[open] .chev { transform: rotate(180deg); }
+
+  .recipe {
+    border-top: 1px solid var(--line);
+    background: var(--surface-2);
+    padding: 18px 18px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .recipe h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+
+  .recipe ul { margin: 0; padding-left: 0; list-style: none; }
+
+  .recipe ul li {
+    padding: 3px 0;
+    font-size: 14.5px;
+    border-bottom: 1px dotted var(--line);
+  }
+
+  .recipe ul li:last-child { border-bottom: 0; }
+
+  .recipe ul li span {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    float: right;
+    margin-left: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .recipe ol {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 14.5px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .recipe ol::marker { color: var(--accent); }
+
+  /* ---------- shopping ---------- */
+  .progress {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .progress button {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 10px;
+    cursor: pointer;
+  }
+
+  .progress button:hover { color: var(--ink); border-color: var(--muted); }
+
+  .cats { display: flex; flex-direction: column; gap: 26px; }
+
+  .cat > h3 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .01em;
+    margin: 0 0 8px;
+  }
+
+  .code {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 4px;
+    padding: 3px 6px;
+  }
+
+  .cat ul { list-style: none; margin: 0; padding: 0; }
+
+  .cat li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cat li:last-child { border-bottom: 0; }
+
+  .item {
+    display: grid;
+    grid-template-columns: 20px 1fr auto;
+    align-items: baseline;
+    gap: 12px;
+    padding: 9px 2px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  .item input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: var(--accent);
+    align-self: center;
+  }
+
+  .item .qty {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .item input:checked ~ .name,
+  .item input:checked ~ .qty {
+    text-decoration: line-through;
+    color: var(--muted);
+    opacity: .6;
+  }
+
+  .item:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* ---------- footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  footer p { margin: 0; max-width: 62ch; }
+
+  footer strong { color: var(--ink); font-weight: 700; }
+
+  .cta {
+    display: inline-block;
+    margin-top: 4px;
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 15px;
+    background: var(--accent);
+    color: #fff;
+    padding: 11px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+  }
+  .cta:hover { filter: brightness(1.05); }
+
+  @media (max-width: 560px) {
+    .recipe { grid-template-columns: 1fr; gap: 18px; }
+    .day > summary { grid-template-columns: 54px 1fr 18px; gap: 11px; padding: 14px; }
+    .recipe ul li span { float: none; display: block; margin-left: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow"><a href="/">&larr; Wat eten we vanavond?</a> &nbsp;·&nbsp; week 38</p>
+    <h1>Weekmenu 14 &ndash; 20 september</h1>
+    <p class="daterange">Zeven doordeweekse maaltijden en de bijbehorende boodschappen, klaar om in Picnic te zetten.</p>
+    <div class="facts">
+      <span class="fact">5 personen</span>
+      <span class="fact">max 20 min</span>
+      <span class="fact">2&times; kip &middot; 2&times; rund &middot; 1&times; vis &middot; 2&times; vega</span>
+      <span class="fact">55 producten</span>
+    </div>
+    <a class="cta" href="/?weekmenu=w38">Zet dit weekmenu in mijn planner &rarr;</a>
+  </header>
+
+  <section>
+    <div class="sectionhead">
+      <h2>Het menu</h2>
+      <p class="eyebrow">Tik een dag aan voor recept</p>
+    </div>
+
+    <div class="days">
+
+      <details class="day" open>
+        <summary>
+          <span class="daychip">ma<b>14</b></span>
+          <span>
+            <span class="dish">Teriyaki&#8209;kipnoedels met paprika, courgette en mais</span>
+            <span class="tags"><span class="time">20 min</span><span>kip</span><span>noedels</span><span>wokpan</span></span>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="recipe">
+          <div>
+            <h3>Ingrediënten</h3>
+            <ul>
+              <li>Kipfilet, in reepjes <span>600 g</span></li>
+              <li>Wokmie <span>400 g</span></li>
+              <li>Rode paprika <span>2 st</span></li>
+              <li>Courgette <span>1 st</span></li>
+              <li>Mais <span>1 blik</span></li>
+              <li>Ui <span>1 st</span></li>
+              <li>Knoflook <span>2 tenen</span></li>
+              <li>Teriyakisaus <span>6 el</span></li>
+              <li>Sojasaus <span>2 el</span></li>
+              <li>Bosui <span>1 bosje</span></li>
+              <li>Sesamzaad <span>1 el</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Zo maak je het</h3>
+            <ol>
+              <li>Kook de mie in 3&ndash;4 minuten gaar, giet af en spoel koud zodat hij niet plakt.</li>
+              <li>Wok de kip 5 minuten op hoog vuur. Voeg ui, knoflook, paprika en courgette toe en bak 5 minuten mee &ndash; groente mag beetgaar blijven.</li>
+              <li>Mais, mie, teriyaki en soja erdoor, 2 minuten doorwarmen. Afmaken met sesamzaad en bosui.</li>
+            </ol>
+          </div>
+        </div>
+      </details>
+
+      <details class="day">
+        <summary>
+          <span class="daychip">di<b>15</b></span>
+          <span>
+            <span class="dish">Pasta met tomaat, champignon en mozzarella</span>
+            <span class="tags"><span class="time">20 min</span><span>vega</span><span>pasta</span><span>één pan saus</span></span>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="recipe">
+          <div>
+            <h3>Ingrediënten</h3>
+            <ul>
+              <li>Volkoren penne <span>500 g</span></li>
+              <li>Champignons <span>400 g</span></li>
+              <li>Cherrytomaten <span>250 g</span></li>
+              <li>Tomatenblokjes <span>2 blik</span></li>
+              <li>Verse spinazie <span>100 g</span></li>
+              <li>Mozzarella <span>2 bollen</span></li>
+              <li>Ui <span>1 st</span></li>
+              <li>Knoflook <span>2 tenen</span></li>
+              <li>Oregano <span>1 tl</span></li>
+              <li>Olijfolie <span>2 el</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Zo maak je het</h3>
+            <ol>
+              <li>Zet de penne op. Bak intussen ui, knoflook en de gehalveerde champignons 6 minuten.</li>
+              <li>Tomatenblokjes, cherrytomaten en oregano erbij, 8 minuten laten pruttelen tot de tomaatjes openbarsten.</li>
+              <li>Spinazie erdoor laten slinken, pasta mengen en de mozzarella er in stukjes over &ndash; die smelt na met de restwarmte.</li>
+            </ol>
+          </div>
+        </div>
+      </details>
+
+      <details class="day">
+        <summary>
+          <span class="daychip">wo<b>16</b></span>
+          <span>
+            <span class="dish">Wraps met kruidig rundergehakt, mais en frisse salade</span>
+            <span class="tags"><span class="time">20 min</span><span>rund</span><span>wraps</span><span>zelf vullen</span></span>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="recipe">
+          <div>
+            <h3>Ingrediënten</h3>
+            <ul>
+              <li>Rundergehakt <span>500 g</span></li>
+              <li>Volkoren wraps <span>10 st</span></li>
+              <li>Mais <span>1 blik</span></li>
+              <li>Rode paprika <span>1 st</span></li>
+              <li>Cherrytomaten <span>250 g</span></li>
+              <li>Komkommer <span>1 st</span></li>
+              <li>IJsbergsla <span>1 krop</span></li>
+              <li>Ui <span>1 st</span></li>
+              <li>Knoflook <span>2 tenen</span></li>
+              <li>Mexicaanse kruiden <span>1 zakje</span></li>
+              <li>Geraspte kaas <span>200 g</span></li>
+              <li>Griekse yoghurt <span>200 g</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Zo maak je het</h3>
+            <ol>
+              <li>Bak het gehakt met ui, knoflook en de kruiden 8 minuten rul.</li>
+              <li>Mais erdoor en nog 2 minuten doorwarmen.</li>
+              <li>Snijd sla, tomaat, komkommer en paprika. Warm de wraps 30 seconden in een droge pan en zet alles op tafel &ndash; iedereen vult zijn eigen wrap.</li>
+            </ol>
+          </div>
+        </div>
+      </details>
+
+      <details class="day">
+        <summary>
+          <span class="daychip">do<b>17</b></span>
+          <span>
+            <span class="dish">Zalm met citroen&#8209;couscous en roerbakgroenten</span>
+            <span class="tags"><span class="time">20 min</span><span>vis</span><span>couscous</span><span>oven + wok</span></span>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="recipe">
+          <div>
+            <h3>Ingrediënten</h3>
+            <ul>
+              <li>Zalmfilet <span>5 st</span></li>
+              <li>Couscous <span>400 g</span></li>
+              <li>Wokgroente (wortel &amp; sperziebonen) <span>400 g</span></li>
+              <li>Gele paprika <span>1 st</span></li>
+              <li>Ui <span>1 st</span></li>
+              <li>Knoflook <span>2 tenen</span></li>
+              <li>Citroen <span>1 st</span></li>
+              <li>Groentebouillonblokje <span>1 st</span></li>
+              <li>Peterselie <span>1 bakje</span></li>
+              <li>Olijfolie <span>2 el</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Zo maak je het</h3>
+            <ol>
+              <li>Leg de zalm op bakpapier, bestrooi met peper en wat citroenrasp en schuif 12 minuten in de oven op 200&nbsp;&deg;C.</li>
+              <li>Overgiet de couscous met 500 ml kokende bouillon, laat 5 minuten wellen en roer los met olijfolie, citroensap en peterselie.</li>
+              <li>Roerbak ui, knoflook, paprika en wokgroente 6 minuten knapperig.</li>
+            </ol>
+          </div>
+        </div>
+      </details>
+
+      <details class="day">
+        <summary>
+          <span class="daychip">vr<b>18</b></span>
+          <span>
+            <span class="dish">Kipshoarma met Turks brood en knoflooksaus</span>
+            <span class="tags"><span class="time">20 min</span><span>kip</span><span>brood</span><span>zelf bouwen</span></span>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="recipe">
+          <div>
+            <h3>Ingrediënten</h3>
+            <ul>
+              <li>Kipshoarmareepjes <span>600 g</span></li>
+              <li>Turks brood <span>2 st</span></li>
+              <li>Rode paprika <span>1 st</span></li>
+              <li>Ui <span>1 st</span></li>
+              <li>Trostomaten <span>4 st</span></li>
+              <li>Komkommer <span>1 st</span></li>
+              <li>Gemengde sla <span>1 zak</span></li>
+              <li>Griekse yoghurt <span>300 g</span></li>
+              <li>Knoflook <span>2 tenen</span></li>
+              <li>Citroen <span>1 st</span></li>
+              <li>Shoarmakruiden <span>1 zakje</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Zo maak je het</h3>
+            <ol>
+              <li>Bak de kip met ui, paprika en shoarmakruiden 10 minuten op hoog vuur.</li>
+              <li>Roer ondertussen de yoghurt met geperste knoflook, een scheut citroensap, peper en zout tot knoflooksaus.</li>
+              <li>Warm het brood 5 minuten mee in de oven en snijd de groenten. Iedereen bouwt zijn eigen broodje.</li>
+            </ol>
+          </div>
+        </div>
+      </details>
+
+      <details class="day">
+        <summary>
+          <span class="daychip">za<b>19</b></span>
+          <span>
+            <span class="dish">Gehaktballetjes in tomatensaus met aardappelpuree en broccoli</span>
+            <span class="tags"><span class="time">20 min</span><span>rund</span><span>aardappel</span><span>kinderfavoriet</span></span>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="recipe">
+          <div>
+            <h3>Ingrediënten</h3>
+            <ul>
+              <li>Half&#8209;om&#8209;half gehakt <span>600 g</span></li>
+              <li>Kruimige aardappelen <span>1,5 kg</span></li>
+              <li>Broccoli <span>1 grote</span></li>
+              <li>Passata <span>2 pak</span></li>
+              <li>Champignons <span>200 g</span></li>
+              <li>Ui <span>1 st</span></li>
+              <li>Knoflook <span>2 tenen</span></li>
+              <li>Ei <span>1 st</span></li>
+              <li>Paneermeel <span>2 el</span></li>
+              <li>Melk <span>150 ml</span></li>
+              <li>Roomboter <span>klontje</span></li>
+              <li>Italiaanse kruiden <span>1 tl</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Zo maak je het</h3>
+            <ol>
+              <li>Snijd de aardappelen in blokjes en kook ze 15 minuten; doe de broccoliroosjes de laatste 6 minuten erbij.</li>
+              <li>Draai balletjes van gehakt, ei, paneermeel en kruiden en bak ze 8 minuten rondom bruin. Voeg ui, knoflook, champignons en passata toe en laat 6 minuten pruttelen.</li>
+              <li>Stamp de aardappelen met melk en boter tot puree.</li>
+            </ol>
+          </div>
+        </div>
+      </details>
+
+      <details class="day">
+        <summary>
+          <span class="daychip">zo<b>20</b></span>
+          <span>
+            <span class="dish">Groentecurry met kikkererwten, kokosmelk en rijst</span>
+            <span class="tags"><span class="time">20 min</span><span>vega</span><span>rijst</span><span>restjes vriezen goed in</span></span>
+          </span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="recipe">
+          <div>
+            <h3>Ingrediënten</h3>
+            <ul>
+              <li>Basmatirijst <span>500 g</span></li>
+              <li>Kikkererwten <span>2 blik</span></li>
+              <li>Kokosmelk <span>1 blik</span></li>
+              <li>Courgette <span>1 st</span></li>
+              <li>Gele paprika <span>1 st</span></li>
+              <li>Wortel <span>250 g</span></li>
+              <li>Ui <span>1 st</span></li>
+              <li>Knoflook <span>2 tenen</span></li>
+              <li>Verse gember <span>1 stukje</span></li>
+              <li>Gele currypasta <span>2 el</span></li>
+              <li>Limoen <span>1 st</span></li>
+              <li>Verse koriander <span>1 bakje</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Zo maak je het</h3>
+            <ol>
+              <li>Zet de rijst op.</li>
+              <li>Fruit ui, knoflook, gember en currypasta 2 minuten. Voeg de wortel in dunne plakjes, paprika en courgette toe en bak 5 minuten mee.</li>
+              <li>Kikkererwten en kokosmelk erbij, 6 minuten pruttelen. Afmaken met limoensap en koriander &ndash; currypasta apart erbij voor wie het pittiger wil.</li>
+            </ol>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sectionhead">
+      <h2>Boodschappen</h2>
+      <div class="progress">
+        <span id="count">0 / 55 afgevinkt</span>
+        <button type="button" id="reset">Wis</button>
+      </div>
+    </div>
+
+    <div class="cats" id="cats">
+
+      <div class="cat">
+        <h3><span class="code">gf</span> Groente &amp; fruit</h3>
+        <ul>
+          <li><label class="item"><input type="checkbox" id="i-gf-1"><span class="name">Rode paprika</span><span class="qty">4 st</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-2"><span class="name">Gele paprika</span><span class="qty">2 st</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-3"><span class="name">Courgette</span><span class="qty">2 st</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-4"><span class="name">Champignons</span><span class="qty">600 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-5"><span class="name">Uien</span><span class="qty">1 net (7 st)</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-6"><span class="name">Knoflook</span><span class="qty">1 bol</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-7"><span class="name">Cherrytomaten</span><span class="qty">500 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-8"><span class="name">Trostomaten</span><span class="qty">4 st</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-9"><span class="name">Komkommer</span><span class="qty">2 st</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-10"><span class="name">IJsbergsla</span><span class="qty">1 krop</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-11"><span class="name">Gemengde sla</span><span class="qty">1 zak</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-12"><span class="name">Verse spinazie</span><span class="qty">100 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-13"><span class="name">Broccoli</span><span class="qty">1 grote</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-14"><span class="name">Wokgroente wortel &amp; sperziebonen</span><span class="qty">400 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-15"><span class="name">Wortel</span><span class="qty">250 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-16"><span class="name">Bosui</span><span class="qty">1 bosje</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-17"><span class="name">Verse gember</span><span class="qty">1 stukje</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-18"><span class="name">Citroen</span><span class="qty">2 st</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-19"><span class="name">Limoen</span><span class="qty">1 st</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-20"><span class="name">Verse koriander</span><span class="qty">1 bakje</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-21"><span class="name">Verse peterselie</span><span class="qty">1 bakje</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-gf-22"><span class="name">Kruimige aardappelen</span><span class="qty">1,5 kg</span></label></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="code">vv</span> Vlees &amp; vis</h3>
+        <ul>
+          <li><label class="item"><input type="checkbox" id="i-vv-1"><span class="name">Kipfilet</span><span class="qty">600 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-vv-2"><span class="name">Kipshoarmareepjes</span><span class="qty">600 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-vv-3"><span class="name">Rundergehakt</span><span class="qty">500 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-vv-4"><span class="name">Half-om-half gehakt</span><span class="qty">600 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-vv-5"><span class="name">Zalmfilet</span><span class="qty">5 st</span></label></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="code">zk</span> Zuivel &amp; kaas</h3>
+        <ul>
+          <li><label class="item"><input type="checkbox" id="i-zk-1"><span class="name">Mozzarella</span><span class="qty">2 bollen</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-zk-2"><span class="name">Geraspte kaas</span><span class="qty">200 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-zk-3"><span class="name">Griekse yoghurt</span><span class="qty">500 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-zk-4"><span class="name">Melk</span><span class="qty">1 liter</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-zk-5"><span class="name">Roomboter</span><span class="qty">1 pak</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-zk-6"><span class="name">Eieren</span><span class="qty">6 st</span></label></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="code">pg</span> Pasta, rijst &amp; granen</h3>
+        <ul>
+          <li><label class="item"><input type="checkbox" id="i-pg-1"><span class="name">Wokmie</span><span class="qty">400 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-pg-2"><span class="name">Volkoren penne</span><span class="qty">500 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-pg-3"><span class="name">Couscous</span><span class="qty">400 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-pg-4"><span class="name">Basmatirijst</span><span class="qty">500 g</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-pg-5"><span class="name">Volkoren wraps</span><span class="qty">10 st</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-pg-6"><span class="name">Paneermeel</span><span class="qty">1 pak</span></label></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="code">br</span> Brood</h3>
+        <ul>
+          <li><label class="item"><input type="checkbox" id="i-br-1"><span class="name">Turks brood</span><span class="qty">2 st</span></label></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="code">sk</span> Sauzen &amp; kruiden</h3>
+        <ul>
+          <li><label class="item"><input type="checkbox" id="i-sk-1"><span class="name">Teriyakisaus</span><span class="qty">1 fles</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-2"><span class="name">Sojasaus</span><span class="qty">1 fles</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-3"><span class="name">Tomatenblokjes</span><span class="qty">2 blik</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-4"><span class="name">Passata</span><span class="qty">2 pak</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-5"><span class="name">Kokosmelk</span><span class="qty">1 blik</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-6"><span class="name">Gele currypasta</span><span class="qty">1 potje</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-7"><span class="name">Shoarmakruiden</span><span class="qty">1 zakje</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-8"><span class="name">Mexicaanse kruiden</span><span class="qty">1 zakje</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-9"><span class="name">Italiaanse kruiden / oregano</span><span class="qty">1 potje</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-10"><span class="name">Groentebouillonblokjes</span><span class="qty">1 pak</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-11"><span class="name">Olijfolie</span><span class="qty">1 fles</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-sk-12"><span class="name">Zonnebloemolie</span><span class="qty">1 fles</span></label></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="code">ov</span> Overig</h3>
+        <ul>
+          <li><label class="item"><input type="checkbox" id="i-ov-1"><span class="name">Mais</span><span class="qty">2 blik</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-ov-2"><span class="name">Kikkererwten</span><span class="qty">2 blik</span></label></li>
+          <li><label class="item"><input type="checkbox" id="i-ov-3"><span class="name">Sesamzaad</span><span class="qty">1 zakje</span></label></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Zo gebruik je dit:</strong> klik op <em>Zet dit weekmenu in mijn planner</em> hierboven &ndash; dan staan de zeven gerechten meteen in je weekplanner en vult de boodschappenlijst in de app zich vanzelf. Gebruik daar de Picnic&#8209;knop op het boodschappenscherm om het mandje te vullen.</p>
+    <p>De kruiden, oliën en sauzen staan volledig op de lijst &ndash; schrap wat je al in huis hebt voordat je bestelt. Vinkjes blijven in deze browser bewaard.</p>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var KEY = "weekmenu-2026-w38";
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('#cats input[type="checkbox"]'));
+    var countEl = document.getElementById("count");
+
+    function read() {
+      try { return JSON.parse(localStorage.getItem(KEY) || "{}") || {}; }
+      catch (e) { return {}; }
+    }
+
+    function save(state) {
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function render() {
+      var done = boxes.filter(function (b) { return b.checked; }).length;
+      countEl.textContent = done + " / " + boxes.length + " afgevinkt";
+    }
+
+    var state = read();
+    boxes.forEach(function (b) { if (state[b.id]) b.checked = true; });
+    render();
+
+    boxes.forEach(function (b) {
+      b.addEventListener("change", function () {
+        var s = read();
+        if (b.checked) { s[b.id] = 1; } else { delete s[b.id]; }
+        save(s);
+        render();
+      });
+    });
+
+    document.getElementById("reset").addEventListener("click", function () {
+      boxes.forEach(function (b) { b.checked = false; });
+      save({});
+      render();
+    });
+  })();
+</script>
+
+</body></html>
